@@ -24,10 +24,6 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 8. Control de versiones con Git y GitHub
 9. Gestión del proyecto con metodologías ágiles (SCRUM)
 
-## 📅 Plazos
-
-Dos semanas.
-
 ## 📦 Entregables
 
 1. Diagrama ER de la base de datos
