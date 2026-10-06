@@ -8,6 +8,8 @@ Formas parte del equipo de backend de una startup que está lanzando varios prod
 
 En lugar de reimplementar esta lógica en cada producto, el CTO ha decidido construir un **servicio centralizado de gestión de usuarios** que el resto de aplicaciones consumirán a través de una API REST. Tu equipo es el responsable de diseñarlo, desarrollarlo y documentarlo.
 
+Como en la mayoría de equipos de desarrollo actuales, **el trabajo se hará con agentes de IA**: el código lo escribe un agente (como [OpenCode](https://opencode.ai)) con modelos gratuitos, y tu equipo hace de *tech lead*: define qué construir, divide el trabajo en tareas, da contexto al agente, revisa lo que genera y decide qué entra en el repositorio. El agente programa, pero la responsabilidad del código es vuestra.
+
 ## 🎯 Objetivo
 
 Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, consulta, edición y baja) con **autenticación basada en JWT** y **documentación interactiva con Swagger (OpenAPI)**, de forma que cualquier equipo pueda integrarse con ella sin necesidad de leer el código.
@@ -23,6 +25,26 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 7. Tests unitarios y de integración (pytest + `TestClient`)
 8. Control de versiones con Git y GitHub
 9. Gestión del proyecto con metodologías ágiles (SCRUM)
+10. Desarrollo asistido por **agentes de IA** con modelos gratuitos (ver sección siguiente)
+
+## 🤖 Desarrollo Agéntico con IA
+
+El proyecto debe desarrollarse usando un agente de código en la terminal, trabajando como se hace hoy en la industria.
+
+**Herramientas**
+
+- Agente: **[OpenCode](https://opencode.ai)** (recomendado). Se pueden usar alternativas abiertas o gratuitas (Aider, Cline, Kilo Code…), pero hay que justificar la elección.
+- Modelos **gratuitos**, por ejemplo: los modelos gratuitos de OpenCode Zen, modelos `:free` de OpenRouter, la capa gratuita de Groq o Gemini, o modelos locales con **Ollama**.
+- No se puede usar ninguna herramienta de pago. Si cambiáis de modelo durante el proyecto, documentad por qué.
+
+**Forma de trabajo**
+
+1. **Contexto antes que código:** crear un `AGENTS.md` en la raíz con el stack, la estructura de carpetas, las convenciones, los comandos para lanzar los tests y lo que el agente **no** debe hacer (por ejemplo: no subir secretos, no saltarse los tests).
+2. **Spec antes de programar:** cada historia de usuario se describe en una especificación breve (`specs/`) con los criterios de aceptación antes de pedírsela al agente.
+3. **Tareas pequeñas:** una tarea del Kanban equivale a una sesión del agente, una rama y una Pull Request.
+4. **Revisión humana obligatoria:** todo el código generado se lee, se prueba y se revisa en la PR antes de mergear. Hay que prestar especial atención a la seguridad: hash de contraseñas, validación del JWT, secretos y permisos.
+5. **Los tests son el contrato:** el agente debe dejar los tests pasando. Si un test falla, se arregla el código, no se borra el test.
+6. **Trazabilidad:** registrar los prompts más relevantes y las decisiones que se tomaron (qué se aceptó, qué se rechazó y por qué).
 
 ## 📦 Entregables
 
@@ -33,6 +55,9 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 5. Suite de tests completa y pasando
 6. Documento de retrospectiva del proyecto
 7. Tablero Kanban (Trello, Jira, GitHub Projects, etc.) con historias de usuario
+8. `AGENTS.md` y carpeta `specs/` con las especificaciones de cada funcionalidad
+9. **Bitácora de IA** (`docs/ai-log.md`): herramienta y modelos usados, prompts clave, errores o alucinaciones del agente y cómo se corrigieron
+10. Historial de PRs con revisiones visibles del código generado
 
 ## 🏆 Niveles de Entrega
 
@@ -48,6 +73,7 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 - Variables de entorno para datos sensibles (`SECRET_KEY`, URL de la BBDD…)
 - Logging básico y manejo de excepciones con códigos HTTP apropiados (400, 401, 403, 404, 409…)
 - Gestión de proyecto con Kanban
+- `AGENTS.md` funcional y bitácora de IA con al menos los prompts de cada funcionalidad principal
 
 ### 🟡 Nivel Medio
 
@@ -58,6 +84,8 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 - Migraciones de base de datos con **Alembic**
 - Documentación Swagger enriquecida (tags, descripciones, ejemplos, respuestas de error)
 - Arquitectura por capas (routers, services, repositories, schemas)
+- Flujo spec → agente → PR → revisión aplicado a todas las historias de usuario
+- Comparativa de al menos 2 modelos gratuitos en una misma tarea (calidad, velocidad, errores)
 
 ### 🟠 Nivel Avanzado
 
@@ -67,6 +95,7 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 - Soft delete y auditoría (quién creó/modificó cada usuario y cuándo)
 - Cobertura de tests ≥ 80 %
 - Pipeline de CI con GitHub Actions (lint + tests en cada PR)
+- Comandos, skills o subagentes personalizados en OpenCode para tareas repetitivas (generar tests, revisar seguridad…)
 
 ### 🔴 Nivel Experto
 
@@ -75,11 +104,14 @@ Desarrollar una API REST con **FastAPI** que permita gestionar usuarios (alta, c
 - Login social con OAuth2 (Google, GitHub…)
 - Autenticación en dos pasos (2FA / TOTP)
 - Interfaz de usuario básica (web o móvil) que consuma la API
+- Revisión automática de PRs con un agente de IA en GitHub Actions usando un modelo gratuito
+- Servidor MCP propio o integración de herramientas MCP en el flujo del agente
 
 ## 🌟 Competencias:
 - Diseñar y gestionar bases de datos
 - Diseñar el back-end de aplicaciones
 - Implementar mecanismos de autenticación y seguridad
 - Implementar tests de calidad
+- Desarrollar software con agentes de IA de forma crítica y responsable
 - Gestionar equipos técnicos
 - Configurar y automatizar su entorno de trabajo
