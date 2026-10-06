@@ -35,16 +35,17 @@ El proyecto debe desarrollarse usando un agente de código en la terminal, traba
 
 - Agente: **[OpenCode](https://opencode.ai)** (recomendado). Se pueden usar alternativas abiertas o gratuitas (Aider, Cline, Kilo Code…), pero hay que justificar la elección.
 - Modelos **gratuitos**, por ejemplo: los modelos gratuitos de OpenCode Zen, modelos `:free` de OpenRouter, la capa gratuita de Groq o Gemini, o modelos locales con **Ollama**.
-- No se puede usar ninguna herramienta de pago. Si cambiáis de modelo durante el proyecto, documentad por qué.
+- Si tienen IAs de pago pueden utilizarlas, solo que tenerlo en cuenta para no pisar el trabajo del equipo, delimitar muy bien el alcance que tendrán.
 
 **Forma de trabajo**
 
 1. **Contexto antes que código:** crear un `AGENTS.md` en la raíz con el stack, la estructura de carpetas, las convenciones, los comandos para lanzar los tests y lo que el agente **no** debe hacer (por ejemplo: no subir secretos, no saltarse los tests).
-2. **Spec antes de programar:** cada historia de usuario se describe en una especificación breve (`specs/`) con los criterios de aceptación antes de pedírsela al agente.
-3. **Tareas pequeñas:** una tarea del Kanban equivale a una sesión del agente, una rama y una Pull Request.
-4. **Revisión humana obligatoria:** todo el código generado se lee, se prueba y se revisa en la PR antes de mergear. Hay que prestar especial atención a la seguridad: hash de contraseñas, validación del JWT, secretos y permisos.
-5. **Los tests son el contrato:** el agente debe dejar los tests pasando. Si un test falla, se arregla el código, no se borra el test.
-6. **Trazabilidad:** registrar los prompts más relevantes y las decisiones que se tomaron (qué se aceptó, qué se rechazó y por qué).
+2. **SDD & Ontologías:** antes de pedirle código al agente, cada funcionalidad se define con *Spec-Driven Development* en una spec (`specs/`) con requisitos y criterios de aceptación, apoyada en una ontología del dominio: entidades (`User`, `Role`, `Token`…), sus atributos, relaciones y reglas. Así el agente y el equipo comparten el mismo vocabulario y no inventan conceptos.
+3. **Spec antes de programar:** cada historia de usuario se describe en una especificación breve (`specs/`) con los criterios de aceptación antes de pedírsela al agente.
+4. **Tareas pequeñas:** una tarea del Kanban equivale a una sesión del agente, una rama y una Pull Request.
+5. **Revisión humana obligatoria:** todo el código generado se lee, se prueba y se revisa en la PR antes de mergear. Hay que prestar especial atención a la seguridad: hash de contraseñas, validación del JWT, secretos y permisos.
+6. **Los tests son el contrato:** el agente debe dejar los tests pasando. Si un test falla, se arregla el código, no se borra el test.
+7. **Trazabilidad:** registrar los prompts más relevantes y las decisiones que se tomaron (qué se aceptó, qué se rechazó y por qué).
 
 ## 📦 Entregables
 
